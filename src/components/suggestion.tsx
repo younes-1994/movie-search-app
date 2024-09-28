@@ -1,23 +1,17 @@
 "use client";
 
-import { useState, ChangeEvent, useCallback, useRef, useEffect } from "react";
-import { useDebounceFn } from "ahooks";
-import { CircleX, LoaderCircle, Search, SlidersHorizontal } from "lucide-react";
+import { useState, useCallback, useEffect } from "react";
 import clsx from "clsx";
 
-export default function Suggestion({
-  value,
-  debouncedValue,
-  data,
-  onclick,
-  className,
-}: {
+type Props = {
   value: string;
   debouncedValue: string;
   data: Object | string;
   onclick: Function;
   className: string;
-}) {
+};
+
+const Suggestion: React.FC<Props> = ({ value, debouncedValue, data, onclick, className }) => {
   const [searchHistory, setSearchHistory] = useState<string[]>([]); // Store previous search terms
   const [suggestions, setSuggestions] = useState<string[]>([]); // Filtered suggestions
 
@@ -62,4 +56,7 @@ export default function Suggestion({
         ))}
       </ul>
     );
-}
+};
+Suggestion.displayName = "Suggestion";
+
+export { Suggestion };
