@@ -35,6 +35,7 @@ const MovieSearchItem: React.FC<Props> = ({ movie, title }) => {
       >
         <div className="w-5/12 self-center">
           <CustomImage
+            key={movie.imdbID || movie.Title}
             src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.svg"}
             alt={movie.Title}
             width={100}
