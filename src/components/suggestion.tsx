@@ -25,7 +25,6 @@ const Suggestion: React.FC<Props> = ({ value, debouncedValue, data, onclick, cla
 
   const handleSuggestion = useCallback(
     (suggestion: string) => {
-      console.log("inner sug", suggestion);
       setSuggestions([]);
       onclick(suggestion);
     },

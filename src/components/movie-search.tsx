@@ -10,7 +10,7 @@ import { TextField } from "@/components/ui/text-field";
 import { Card } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import MovieSearchItem from "./movie-search-item";
-import Suggestion from "./suggestion";
+import { Suggestion } from "./suggestion";
 
 export default function MovieSearch() {
   const input = useRef<HTMLInputElement>(null);
@@ -31,7 +31,6 @@ export default function MovieSearch() {
   }, [setSearchTerm]);
   const handleSuggestion = useCallback(
     (suggestion: string) => {
-      console.log("suggestion", suggestion);
       if (input.current) input.current.value = suggestion;
       setSearchTerm(suggestion);
     },
