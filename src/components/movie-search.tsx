@@ -1,8 +1,7 @@
-//TODO: autocomplete
 "use client";
 
-import { useState, ChangeEvent, useCallback, useRef } from "react";
-import { useDebounceFn } from "ahooks";
+import { useState, ChangeEvent, useCallback, useRef, useEffect } from "react";
+import { useDebounce } from "ahooks";
 import { CircleX, LoaderCircle, Search, SlidersHorizontal } from "lucide-react";
 
 // import { MovieDetails } from "@/domain/movie";
@@ -11,24 +10,33 @@ import { TextField } from "@/components/ui/text-field";
 import { Card } from "@/components/ui/card";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import MovieSearchItem from "./movie-search-item";
+import Suggestion from "./suggestion";
 
 export default function MovieSearch() {
   const input = useRef<HTMLInputElement>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const { run: handleChange } = useDebounceFn(
+  const debouncedSearchTerm = useDebounce(searchTerm);
+  const { data: movieDetails, isLoading, error } = useSearchByTitle(debouncedSearchTerm);
+
+  const handleChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>): void => {
-      setSearchTerm(e.target.value);
+      const newTerm = e.target.value;
+      setSearchTerm(newTerm);
     },
-    {
-      wait: 500,
-    },
+    [setSearchTerm],
   );
   const clearSearchTerm = useCallback(() => {
     if (input.current) input.current.value = "";
     setSearchTerm("");
   }, [setSearchTerm]);
-
-  const { data: movieDetails, isLoading, error } = useSearchByTitle(searchTerm);
+  const handleSuggestion = useCallback(
+    (suggestion: string) => {
+      console.log("suggestion", suggestion);
+      if (input.current) input.current.value = suggestion;
+      setSearchTerm(suggestion);
+    },
+    [setSearchTerm],
+  );
 
   return (
     <Card>
@@ -37,6 +45,7 @@ export default function MovieSearch() {
         ref={input}
         type="text"
         placeholder="Enter a movie title"
+        className="peer"
         onChange={handleChange}
         startAdornment={
           isLoading ? <LoaderCircle className="animate-spin" data-testid="loader-spinner" /> : <Search />
@@ -53,7 +62,15 @@ export default function MovieSearch() {
             <SlidersHorizontal />
           </>
         }
-      />
+      >
+        <Suggestion
+          value={searchTerm}
+          debouncedValue={debouncedSearchTerm}
+          data={movieDetails}
+          onclick={handleSuggestion}
+          className="invisible peer-focus:visible transition-all duration-300 ease-in-out delay-500 absolute right-0 left-0 top-[60px] z-10"
+        />
+      </TextField>
 
       {error && (
         <Alert variant="destructive" className="mt-4">
