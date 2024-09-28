@@ -6,8 +6,8 @@ import clsx from "clsx";
 type Props = {
   value: string;
   debouncedValue: string;
-  data: Object | string;
-  onclick: Function;
+  data: object | string;
+  onclick: (suggestion: string) => void;
   className: string;
 };
 

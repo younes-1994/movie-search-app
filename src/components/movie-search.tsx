@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent, useCallback, useRef, useEffect } from "react";
+import { useState, ChangeEvent, useCallback, useRef } from "react";
 import { useDebounce } from "ahooks";
 import { CircleX, LoaderCircle, Search, SlidersHorizontal } from "lucide-react";
 
