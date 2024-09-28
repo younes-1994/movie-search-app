@@ -1,8 +1,10 @@
-import { CalendarIcon } from "lucide-react";
+import { MouseEvent, useCallback, useMemo } from "react";
+import { CalendarIcon, Star } from "lucide-react";
 
 import { MovieDetails } from "@/domain/movie";
 import { CustomLink } from "@/components/next/custom-link";
 import { CustomImage } from "@/components/next/custom-image";
+import useFavorite from "@/use-cases/use-favorite";
 
 type Props = {
   movie: MovieDetails;
@@ -10,6 +12,21 @@ type Props = {
 };
 
 const MovieSearchItem: React.FC<Props> = ({ movie, title }) => {
+  const { toggleFavorite, isFavorite } = useFavorite();
+
+  const handleToggleFavorite = useCallback(
+    (e: MouseEvent<SVGSVGElement>) => {
+      e.stopPropagation();
+      e.preventDefault();
+      toggleFavorite(movie);
+    },
+    [movie, title, toggleFavorite],
+  );
+
+  const fill = useMemo(() => {
+    return isFavorite(movie.imdbID) ? "orange" : "none";
+  }, [movie, isFavorite]);
+
   if (movie)
     return (
       <CustomLink
@@ -32,7 +49,9 @@ const MovieSearchItem: React.FC<Props> = ({ movie, title }) => {
             <span className="mr-4">{movie.Year}</span>
           </div>
         </div>
-        <div className="w-1/12 self-start mt-6"></div>
+        <div className="w-1/12 self-start mt-6">
+          <Star onClick={handleToggleFavorite} color="orange" fill={fill} />
+        </div>
       </CustomLink>
     );
   else return <div></div>;
