@@ -1,6 +1,6 @@
 import * as React from "react";
 import { useTransition } from "react";
-import Link, { LinkProps } from "next/link";
+import { LinkProps } from "next/link";
 import { useRouter } from "next/navigation";
 import clsx from "clsx";
 
