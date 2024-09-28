@@ -8,9 +8,9 @@ export interface TextFieldProps extends React.InputHTMLAttributes<HTMLInputEleme
 }
 
 const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
-  ({ className, type, startAdornment, endAdornment, ...props }, ref) => {
+  ({ className, type, startAdornment, endAdornment, children, ...props }, ref) => {
     return (
-      <div className="flex items-center w-full rounded-2xl border border-input bg-transparent px-2 py-2 text-md shadow-sm transition-colors placeholder:text-muted-foreground focus-within:border-primary transition-all ease-in-out">
+      <div className="relative flex items-center w-full rounded-2xl border border-input bg-transparent px-2 py-2 text-md shadow-sm transition-colors placeholder:text-muted-foreground focus-within:border-primary transition-all ease-in-out">
         {startAdornment}
         <input
           type={type}
@@ -19,6 +19,7 @@ const TextField = React.forwardRef<HTMLInputElement, TextFieldProps>(
           {...props}
         />
         {endAdornment}
+        {children}
       </div>
     );
   },
