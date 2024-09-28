@@ -4,9 +4,7 @@ import { CustomLink } from "@/components/next/custom-link";
 import { Badge } from "@/components/ui/badge";
 import useFavorite from "@/use-cases/use-favorite";
 
-type Props = {};
-
-const HeaderContent: React.FC<Props> = () => {
+const HeaderContent: React.FC = () => {
   const { favoriteCount } = useFavorite();
 
   return (
