@@ -24,4 +24,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 - you can add error middleware for actions
 - you can add toast to use-cases (now we have additional rendering for toast)
-- reading image from next cache make image weird
+- add error middleware and factory method to get-movie action
+- add error middleware and factory method to get-movie-by-id action
+- add pagination to movie-search component
+- add more data to history in search-suggestion component
