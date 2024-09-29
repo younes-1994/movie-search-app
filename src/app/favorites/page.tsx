@@ -9,9 +9,13 @@ export default function Favorites() {
 
   if (favorites?.length)
     return (
-      <Card className="flex flex-col items-center">
-        {favorites?.map((movie) => <MovieSearchItem key={movie.imdbID} movie={movie} title={movie.Title} />)}
-      </Card>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4">
+        {favorites?.map((movie) => (
+          <Card key={movie.imdbID}>
+            <MovieSearchItem movie={movie} />
+          </Card>
+        ))}
+      </div>
     );
   else
     return (
