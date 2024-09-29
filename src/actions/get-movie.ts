@@ -5,7 +5,7 @@ import { MovieParams } from "@/domain/movie";
 export async function getMovie({ title, type, page }: MovieParams) {
   try {
     let url = `https://www.omdbapi.com/?apikey=${process.env.NEXT_PUBLIC_OMDB_API_KEY}&s=${title}&page=${page}`;
-    let config = { next: { tags: ["getMovie", title, page.toString()], revalidate: 1 * 60 * 60 } };
+    const config = { next: { tags: ["getMovie", title, page.toString()], revalidate: 1 * 60 * 60 } };
 
     if (type) {
       url += `&page=${type}`;

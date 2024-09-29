@@ -5,7 +5,7 @@ import { getMovie } from "@/actions/get-movie";
 import { MovieParams } from "@/domain/movie";
 
 export function getQueryKey({ title, type, page }: MovieParams) {
-  let key = ["getMovie", title, page];
+  const key = ["getMovie", title, page];
   if (type) key.push(type);
   return key;
 }
