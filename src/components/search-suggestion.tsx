@@ -1,3 +1,4 @@
+//TODO: ADD MORE DATA TO HISTORY
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
@@ -11,7 +12,7 @@ type Props = {
   className: string;
 };
 
-const Suggestion: React.FC<Props> = ({ value, debouncedValue, data, onclick, className }) => {
+const SearchSuggestion: React.FC<Props> = ({ value, debouncedValue, data, onclick, className }) => {
   const [searchHistory, setSearchHistory] = useState<string[]>([]); // Store previous search terms
   const [suggestions, setSuggestions] = useState<string[]>([]); // Filtered suggestions
 
@@ -43,7 +44,7 @@ const Suggestion: React.FC<Props> = ({ value, debouncedValue, data, onclick, cla
 
   if (suggestions.length > 0)
     return (
-      <ul className={clsx("mt-2 bg-white border border-gray-300 rounded shadow", className)}>
+      <ul className={clsx("mt-2 bg-white border border-gray-300 rounded-xl shadow", className)}>
         {suggestions.map((suggestion, index) => (
           <li
             key={index}
@@ -56,6 +57,6 @@ const Suggestion: React.FC<Props> = ({ value, debouncedValue, data, onclick, cla
       </ul>
     );
 };
-Suggestion.displayName = "Suggestion";
+SearchSuggestion.displayName = "SearchSuggestion";
 
-export { Suggestion };
+export { SearchSuggestion };

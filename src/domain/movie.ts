@@ -3,7 +3,7 @@ type Ratings = {
   Value: string;
 };
 
-export type MovieDetails = {
+export type MovieDetailsWithId = {
   Title: string;
   Year: string;
   Actors: string;
@@ -29,3 +29,13 @@ export type MovieDetails = {
   imdbVotes: string;
   Ratings: Ratings[];
 };
+
+export type MovieDetails = {
+  Poster: string;
+  Title: string;
+  Type: string;
+  Year: string;
+  imdbID: string;
+};
+
+export type MovieParams = { title: string; page: number; type?: string | null };

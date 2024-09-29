@@ -1,5 +1,5 @@
 "use client";
-import { House, LogOut, Star } from "lucide-react";
+import { House, Star } from "lucide-react";
 import { CustomLink } from "@/components/next/custom-link";
 import { Badge } from "@/components/ui/badge";
 import useFavorite from "@/use-cases/use-favorite";
@@ -21,7 +21,6 @@ const HeaderContent: React.FC = () => {
         )}
         <Star color="orange" />
       </CustomLink>
-      <LogOut />
     </div>
   );
 };

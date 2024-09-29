@@ -1,15 +1,16 @@
 import { CalendarIcon, StarIcon } from "lucide-react";
 
-import { MovieDetails } from "@/domain/movie";
+import { MovieDetailsWithId } from "@/domain/movie";
 import { Card } from "@/components/ui/card";
 import { Empty } from "@/components/ui/empty";
 import { CustomImage } from "@/components/next/custom-image";
+import AddToFavorite from "./add-to-favorite";
 
-export default function MovieDetail({ movie }: { movie: MovieDetails | undefined | null }) {
+export default function MovieDetails({ movie }: { movie: MovieDetailsWithId }) {
   if (movie)
     return (
-      <Card className="flex flex-col items-center">
-        <div className="w-full mb-4">
+      <Card className="grid grid-cols-1 md:grid-cols-2 !max-w-3xl">
+        <div className="w-full">
           <CustomImage
             src={movie.Poster !== "N/A" ? movie.Poster : "/placeholder.svg"}
             alt={movie.Title}
@@ -19,7 +20,11 @@ export default function MovieDetail({ movie }: { movie: MovieDetails | undefined
           />
         </div>
         <div className="w-full">
-          <h2 className="text-2xl font-bold mb-2">{movie.Title}</h2>
+          <div className="mb-2 flex items-center">
+            <h2 className="text-2xl font-bold">{movie.Title}</h2>
+            <div className="grow"></div>
+            <AddToFavorite movie={movie} />
+          </div>
           <p className="text-gray-600 mb-4 italic">{movie.Plot}</p>
           <div className="flex justify-start items-center text-gray-500 mb-2">
             <CalendarIcon className="w-4 h-4 mr-1" />
