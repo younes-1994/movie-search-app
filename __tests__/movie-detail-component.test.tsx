@@ -1,6 +1,6 @@
 import React from "react";
 import { render, screen } from "@testing-library/react";
-import MovieDetail from "@/components/movie-detail";
+import MovieDetails from "@/components/movie-details";
 
 describe("Movie Detail Page", () => {
   it("renders movie details correctly when movie data is found", async () => {
@@ -18,7 +18,7 @@ describe("Movie Detail Page", () => {
       Released: "14 Oct 1994",
     };
 
-    render(<MovieDetail movie={mockMovie} />);
+    render(<MovieDetails movie={mockMovie} />);
 
     expect(screen.getByText("The Shawshank Redemption")).toBeInTheDocument();
     expect(screen.getByText("Two imprisoned men bond over a number of years...")).toBeInTheDocument();
@@ -32,7 +32,7 @@ describe("Movie Detail Page", () => {
   });
 
   it("renders an empty state when no movie is found", async () => {
-    render(<MovieDetail movie={null} />);
+    render(<MovieDetails movie={null} />);
 
     expect(screen.getByText("No Movie Found")).toBeInTheDocument();
   });
